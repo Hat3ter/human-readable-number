@@ -1,6 +1,8 @@
 module.exports = function toReadable(number) {
     const HUNDRED_DELIMITER = 'hundred';
     const SPACE = ' ';
+    const ZERO = '0';
+    const ONE = '1';
     let result = '';
     const strNumber = number.toString();
 
@@ -52,7 +54,7 @@ module.exports = function toReadable(number) {
     }
 
     if (number > 20 && number < 100) {
-        if (strNumber[1] === "0") {
+        if (strNumber[1] === ZERO) {
             return dozens[strNumber[0]];
         } else {
             return `${dozens[strNumber[0]]}${SPACE}${oneToTen[strNumber[1]]}`;
@@ -60,15 +62,15 @@ module.exports = function toReadable(number) {
     }
 
     if (number > 99 && number < 1000) {
-        if (strNumber[1] === "0" && strNumber[2] === "0")
+        if (strNumber[1] === ZERO && strNumber[2] === ZERO)
             return `${oneToTen[strNumber[0]]}${SPACE}${HUNDRED_DELIMITER}`;
-        if (strNumber[1] === "0")
+        if (strNumber[1] === ZERO)
             return `${oneToTen[strNumber[0]]}${SPACE}${HUNDRED_DELIMITER}${SPACE}${oneToTen[strNumber[2]]}`;
-        if (strNumber[1] === "1" && strNumber[2] === '0')
+        if (strNumber[1] === ONE && strNumber[2] === ZERO)
             return `${oneToTen[strNumber[0]]}${SPACE}${HUNDRED_DELIMITER}${SPACE}ten`;
-        if (strNumber[1] === "1")
+        if (strNumber[1] === ONE)
             return `${oneToTen[strNumber[0]]}${SPACE}${HUNDRED_DELIMITER}${SPACE}${elevenToTwenty[strNumber[2]]}`;
-        if (strNumber[2] === "0")
+        if (strNumber[2] === ZERO)
             return `${oneToTen[strNumber[0]]}${SPACE}${HUNDRED_DELIMITER}${SPACE}${dozens[strNumber[1]]}`;
         else
             return `${oneToTen[strNumber[0]]}${SPACE}${HUNDRED_DELIMITER}${SPACE}${dozens[strNumber[1]]}${SPACE}${oneToTen[strNumber[2]]}`;
